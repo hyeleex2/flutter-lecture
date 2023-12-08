@@ -1,17 +1,21 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class feed extends StatefulWidget {
-  const feed({
-    super.key,
-  });
+class Feed extends StatefulWidget {
+  const Feed({
+    Key? key,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  // 생성자 호출되는 시점에 imageUrl 셋팅
+
+  final String imageUrl;
 
   @override
-  State<feed> createState() => _feedState();
+  State<Feed> createState() => _FeedState();
 }
 
-class _feedState extends State<feed> {
+class _FeedState extends State<Feed> {
   // 좋아요 여부
   bool isFavorite = false;
 
@@ -21,7 +25,7 @@ class _feedState extends State<feed> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Image.network(
-          "https://cataas.com/cat",
+          widget.imageUrl,
           height: 400,
           width: double.infinity,
           fit: BoxFit.cover,
@@ -29,8 +33,9 @@ class _feedState extends State<feed> {
         Row(
           children: [
             IconButton(
-              icon: Icon(CupertinoIcons.heart,
-                  color: isFavorite ? Colors.pink: Colors.black,
+              icon: Icon(
+                CupertinoIcons.heart,
+                color: isFavorite ? Colors.pink : Colors.black,
               ),
               onPressed: () {
                 setState(() {
